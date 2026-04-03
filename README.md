@@ -15,11 +15,6 @@ network.sporechain.entry
 
 The entry is the link, not the content. Content lives on IPFS. Entries are lightweight, signed, and portable.
 
-There is no separate taxon record type. A taxon is an entry that other entries point to via `parents`. Canonicality is determined by federation labelers, not by schema.
-
-## Namespace
-
-`network.sporechain` resolves to `sporechain.network`.
 
 ## Lexicon
 
