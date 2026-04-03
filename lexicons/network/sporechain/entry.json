@@ -4,6 +4,7 @@
   "defs": {
     "main": {
       "type": "record",
+      "description": "A biodiversity data entry. The minimal, signed, taxonomically-anchored link that forms the Sporechain network. Entries are the chain. Content lives above.",
       "key": "tid",
       "record": {
         "type": "object",
@@ -11,36 +12,25 @@
         "properties": {
           "subject": {
             "type": "string",
-            "description": "Scientific name",
-            "maxLength": 512
+            "description": "Scientific name (binomial nomenclature). The taxonomic anchor.",
+            "minLength": 1,
+            "maxLength": 300
           },
           "tags": {
             "type": "array",
-            "description": "Searchable tags for discovery",
-            "items": {
-              "type": "string",
-              "maxLength": 100
-            },
-            "maxLength": 20
-          },
-          "data": {
-            "type": "object",
-            "description": "Inline content",
-            "maxGraphemeLength": 10000
+            "description": "Classification tags (entry type, kingdom, provenance, etc.)",
+            "items": { "type": "string", "maxLength": 64 },
+            "maxLength": 8
           },
           "cid": {
             "type": "string",
-            "description": "IPFS CID",
-            "maxLength": 128
+            "description": "IPFS CID pointing to content payload (images, docs, data, custom pages).",
+            "maxLength": 512
           },
           "parents": {
             "type": "array",
-            "description": "Parent entries",
-            "items": {
-              "type": "string",
-              "format": "at-uri",
-              "maxLength": 256
-            },
+            "description": "AT-URI references to parent entries. DAG linkage for lineage, provenance, context.",
+            "items": { "type": "string", "format": "at-uri" },
             "maxLength": 3
           },
           "createdAt": {
