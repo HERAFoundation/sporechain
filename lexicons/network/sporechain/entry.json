@@ -31,7 +31,6 @@
             "type": "array",
             "description": "AT-URI references to parent entries. DAG linkage for lineage, provenance, context.",
             "items": { "type": "string", "format": "at-uri" },
-            "maxLength": 3
           },
           "createdAt": {
             "type": "string",
