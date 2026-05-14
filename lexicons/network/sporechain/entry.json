@@ -34,7 +34,7 @@
           },
           "sourceUri": {
             "type": "string",
-            "description": "Original locator for the content. An https:// URL, at:// URI, or doi: identifier.",
+            "description": "Original locator for the content being attested to. An at:// URI for on-protocol records, https:// URL or doi: for off-protocol content.",
             "maxLength": 2048
           },
           "sourceCollection": {
@@ -54,7 +54,7 @@
           },
           "parents": {
             "type": "array",
-            "description": "AT-URI references for DAG linkage. Lineage, provenance, context.",
+            "description": "References to other network.sporechain.entry records. Entry-to-entry DAG edges for lineage, provenance, and social structure.",
             "items": { "type": "string", "format": "at-uri" }
           },
           "createdAt": {
