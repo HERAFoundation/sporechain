@@ -1,0 +1,47 @@
+{
+  "name": "@sporechain/types",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Shared TypeScript types and utilities for the Sporechain network",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./entry": {
+      "import": "./dist/entry.js",
+      "types": "./dist/entry.d.ts"
+    },
+    "./kinds": {
+      "import": "./dist/kinds.js",
+      "types": "./dist/kinds.d.ts"
+    },
+    "./tags": {
+      "import": "./dist/tags.js",
+      "types": "./dist/tags.d.ts"
+    },
+    "./client": {
+      "import": "./dist/client.js",
+      "types": "./dist/client.d.ts"
+    },
+    "./cid": {
+      "import": "./dist/cid.js",
+      "types": "./dist/cid.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@atproto/api": "^0.13.0",
+    "@ipld/dag-cbor": "^9.2.2",
+    "multiformats": "^13.3.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}
