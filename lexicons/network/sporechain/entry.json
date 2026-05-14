@@ -4,11 +4,11 @@
   "defs": {
     "main": {
       "type": "record",
-      "description": "A biodiversity data entry. The minimal, signed, taxonomically-anchored link that forms the Sporechain network. Entries are the chain. Content lives above.",
+      "description": "A signed stewardship attestation by a DID about content at a point in time. The atomic unit of the Sporechain network.",
       "key": "tid",
       "record": {
         "type": "object",
-        "required": ["subject", "createdAt"],
+        "required": ["subject", "kind", "createdAt"],
         "properties": {
           "subject": {
             "type": "string",
@@ -16,22 +16,46 @@
             "minLength": 1,
             "maxLength": 300
           },
-          "tags": {
-            "type": "array",
-            "description": "Classification tags (entry type, kingdom, provenance, etc.)",
-            "items": { "type": "string", "maxLength": 64 },
-            "maxLength": 8
+          "kind": {
+            "type": "string",
+            "description": "What this entry is doing operationally. Extensible via knownValues.",
+            "knownValues": [
+              "mirroredRecord",
+              "mirroredDocument",
+              "archivedAtprotoRecord",
+              "pinningAttestation",
+              "witness"
+            ]
           },
           "cid": {
             "type": "string",
-            "description": "IPFS CID pointing to content payload (images, docs, data, custom pages).",
+            "description": "IPFS CID pointing to content payload. Required for all kinds except witness.",
             "maxLength": 512
+          },
+          "sourceUri": {
+            "type": "string",
+            "description": "Original locator for the content being attested to. An at:// URI for on-protocol records, https:// URL or doi: for off-protocol content.",
+            "maxLength": 2048
+          },
+          "sourceCollection": {
+            "type": "string",
+            "description": "Semantic label for the source system and record (e.g. mycoportal:occurrence:12345, gbif:occurrence:4567).",
+            "maxLength": 512
+          },
+          "mirroredAt": {
+            "type": "string",
+            "format": "datetime",
+            "description": "When the content was pinned or snapshotted. Distinct from createdAt."
+          },
+          "tags": {
+            "type": "array",
+            "description": "Classification tags: record type, kingdom, provenance, custom.",
+            "items": { "type": "string", "maxLength": 64 }
           },
           "parents": {
             "type": "array",
-            "description": "AT-URI references to parent entries. DAG linkage for lineage, provenance, context.",
-            "items": { "type": "string", "format": "at-uri" },
-            "maxLength": 3
+            "description": "References to other network.sporechain.entry records. Entry-to-entry DAG edges for lineage, provenance, and social structure.",
+            "items": { "type": "string", "format": "at-uri" }
           },
           "createdAt": {
             "type": "string",
